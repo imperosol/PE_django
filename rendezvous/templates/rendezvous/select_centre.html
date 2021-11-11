@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title_page %}
+    {% if injections == 0 %}
+        Début du parcours vaccinal
+    {% elif centres is None %}
+        Parcours vaccinal complet
+    {% else %}
+        Parcours vaccinal incomplet
+    {% endif %}
+{% endblock %}
+
+
+{% block content %}
+
+{% if centres is not None %}
+    <h3>Choisissez un centre pour recevoir la prochaine dose</h3>
+    {% if injections == 0 %}
+    <form action="{% url 'rendezvous:select_vaccin' %}" method="get">
+    {% else %}
+    <form action="{% url 'rendezvous:insert' %}" method="post">
+        <input type="hidden" name="vaccin_id" value="">
+    {% endif %}
+    {% csrf_token %}
+        <input type="hidden" name="patient_id" value="{{ patient_id }}">
+        <div class="form-group">
+            <label for="centre_id">Centres</label>
+            <select name="centre_id" id="centre_id" class="form-control" style="width: 50%" required>
+                {% for centre in centres %}
+                <option value="{{ centre.id }}">{{ centre.label }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <input type="submit" value="valider" class="btn btn-primary">
+    </form>
+{% endif %}
+
+{% endblock %}

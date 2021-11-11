@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title_page %} RDV pris {% endblock %}
+
+{% block content %}
+<ul>
+    <li>vaccin : {{ new.vaccin }}</li>
+    <li>patient : {{ new.patient }}</li>
+    <li>centre : {{ new.centre }}</li>
+    <li>injection : {{ new.injection }}</li>
+</ul>
+{% endblock %}

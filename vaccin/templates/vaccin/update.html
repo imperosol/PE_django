@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title_page %} Liste des vaccins {% endblock %}
+
+{% block content %}
+
+<form action="{% url 'vaccin:updated'  %}" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="id_vaccin">Vaccin à mettre à jour</label>
+        <select class="form-control" name="id_vaccin" id="id_vaccin" style="width:300px" required>
+        {% for vaccin in vaccins %}
+            <option value="{{ vaccin.id }}">{{ vaccin.label }} (doses : {{ vaccin.doses }})</option>
+        {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="id_doses">Nouveau nombre de doses</label>
+        <input type="number" name="new_doses" id="id_doses" min="0" required>
+    </div>
+    <input type="submit" class="btn btn-primary" value="Mettre à jour">
+</form>
+
+{% endblock %}

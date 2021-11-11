@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title_page %} Stock détaillé {% endblock %}
+
+{% block content %}
+
+    <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+            {% for column in head_row %}
+            <td>{{ column }}</td>
+            {% endfor %}
+        </tr>
+        </thead>
+        <tbody>
+        {% for row in body_rows %}
+        <tr>
+            {% for column in row %}
+            <td>{{ column }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

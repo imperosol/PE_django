@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title_page %} Sélectionner un patient à voir {% endblock %}
+
+{% block content %}
+<form action="{% url 'rendezvous:vaccination_patient' %}" method="get">
+    <div class="form-group">
+        <select name="patient_id" id="patient_id" class="form-control" style="width: 50%" required>
+        {% for patient in patients %}
+            <option value="{{ patient.id }}">{{ patient }}</option>
+        {% endfor %}
+        </select>
+    </div>
+    <input type="submit" class="btn btn-primary" value="Ok">
+</form>
+
+{% endblock %}

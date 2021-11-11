@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title_page %} Patient ajouté {% endblock %}
+
+{% block content %}
+<ul>
+    <li>id : {{ new.id }}</li>
+    <li>nom : {{ new.nom }}</li>
+    <li>prénom : {{ new.prenom }}</li>
+    <li>adresse : {{ new.adresse }}</li>
+</ul>
+{% endblock %}

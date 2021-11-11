@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title_page %} Ajouter un vaccin {% endblock %}
+
+{% block content %}
+<form action="{% url 'vaccin:added'  %}" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        {{ form }}
+    </div>
+    <input type="submit" class="btn btn-primary" value="ajouter">
+</form>
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} Vaccination {% endblock %}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="{% static 'public/css/style.css' %}" rel="stylesheet" type="text/css">
+    {% block additional_css %}  {% endblock %}
+</head>
+<body>
+<nav>
+    {% block navbar %} {% include "fragment_nav_bar.html" %} {% endblock %}
+</nav>
+<main>
+    <div class="container">
+        <h1>{% block title_page %} {% endblock %}</h1>
+        {% block content %} {% endblock %}
+    </div>
+</main>
+<footer>
+    {% block footer %}
+    <hr/>
+    <ul>
+        <li>Django</li>
+        <li>UTT, Thomas Girod</li>
+    </ul>
+    <hr/>
+    {% endblock %}
+</footer>
+</body>
+</html>
+

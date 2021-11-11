@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title_page %} Liste des vaccins {% endblock %}
+
+{% block content %}
+
+    <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+            <th scope="col">id</th>
+            <th scope="col">label</th>
+            <th scope="col">doses</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for vaccin in vaccins %}
+        <tr>
+            <td> {{ vaccin.id }}</td>
+            <td> {{ vaccin.label }}</td>
+            <td> {{ vaccin.doses }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

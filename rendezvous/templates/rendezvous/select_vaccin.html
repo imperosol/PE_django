@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title_page %} Sélectionner un vaccin {% endblock %}
+
+{% block content %}
+<form action="{% url 'rendezvous:insert' %}" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        <input type="hidden" name="patient_id" value="{{ patient_id }}">
+        <input type="hidden" name="centre_id" value="{{ centre_id }}">
+        <label for="vaccin_id">Vaccins</label>
+        <select name="vaccin_id" id="vaccin_id" class="form-control" style="width: 50%" required>
+        {% for vaccin in vaccins %}
+            <option value="{{ vaccin.id }}">{{ vaccin }}</option>
+        {% endfor %}
+        </select>
+    </div>
+    <input type="submit" class="btn btn-primary" value="Ok">
+</form>
+
+{% endblock %}

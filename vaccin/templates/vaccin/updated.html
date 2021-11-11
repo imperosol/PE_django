@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title_page %} Vaccin modifié {% endblock %}
+
+{% block content %}
+<ul>
+    <li>id : {{ vaccin.id }}</li>
+    <li>label : {{ vaccin.label }}</li>
+    <li>doses : {{ vaccin.doses }}</li>
+</ul>
+{% endblock %}

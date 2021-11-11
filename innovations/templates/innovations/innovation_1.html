@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title_page %} Innovation 1 {% endblock %}
+
+{% block content %}
+{% for name, patients in tables.items %}
+{% if patients|length > 0 %}
+{{ name }}
+<table class="table table-striped table-bordered">
+    <thead>
+    <tr>
+        <th scope="col">id</th>
+        <th scope="col">nom</th>
+        <th scope="col">prenom</th>
+        <th scope="col">adresse</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for patient in patients %}
+    <tr>
+        <td>{{ patient.id }}</td>
+        <td>{{ patient.nom }}</td>
+        <td>{{ patient.prenom }}</td>
+        <td>{{ patient.adresse }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+{% endfor %}
+{% endblock %}

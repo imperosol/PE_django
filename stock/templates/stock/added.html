@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title_page %} Doses ajoutées dans les stocks {% endblock %}
+
+{% block content %}
+<ul>
+    <li>centre : {{ stock.centre_id }}</li>
+    <li>vaccin : {{ stock.vaccin_id }}</li>
+    <li>doses : {{ stock.doses }}</li>
+</ul>
+{% endblock %}
