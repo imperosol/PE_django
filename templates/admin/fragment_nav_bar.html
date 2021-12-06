@@ -1,62 +1,86 @@
 <!-- ----- début fragmentCaveMenu -->
 
+
 <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="{% url 'index:index' %}">Thomas Girod</a>
+            <a class="navbar-brand" href="{% url 'index:index' %}">PE Django</a>
         </div>
         <ul class="nav navbar-nav">
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                   aria-haspopup="true" aria-expanded="false">Gestion des vaccins<span class="caret"></span></a>
+                   aria-haspopup="true" aria-expanded="false">Vaccins<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><a href="{% url 'vaccin:view_all' %}">Liste des vaccins</a></li>
-                    {% if user.is_authenticated %}
-                    <li><a href="{% url 'vaccin:add' %}">Ajout d'un vaccin</a></li>
-                    <li><a href="{% url 'vaccin:update' %}">Mise à jour d'un vaccin</a></li>
+                    {% if user.is_authenticated and perms.vaccin.add_vaccin %}
+                        <li><a href="{% url 'vaccin:add' %}">Ajout d'un vaccin</a></li>
+                    {% endif %}
+                    {% if user.is_authenticated and perms.vaccin.change_vaccin %}
+                        <li><a href="{% url 'vaccin:update' %}">Mise à jour d'un vaccin</a></li>
                     {% endif %}
                 </ul>
             </li>
             <li>
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                   aria-haspopup="true" aria-expanded="false">Gestion des centres<span class="caret"></span></a>
+                   aria-haspopup="true" aria-expanded="false">Centres<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><a href="{% url 'centre:view_all' %}">Liste des centres</a></li>
-                    {% if user.is_authenticated %}
-                    <li><a href="{% url 'centre:add' %}">Ajouter un centre</a></li>
+                    {% if user.is_authenticated and perms.centre.add_centre %}
+                        <li><a href="{% url 'centre:add' %}">Ajouter un centre</a></li>
                     {% endif %}
                 </ul>
             </li>
             <li>
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                   aria-haspopup="true" aria-expanded="false">Gestion des patients<span class="caret"></span></a>
+                   aria-haspopup="true" aria-expanded="false">Patients<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><a href="{% url 'patient:view_all' %}">Liste des patient</a></li>
-                    {% if user.is_authenticated %}
-                    <li><a href="{% url 'patient:add' %}">Ajouter un patient</a></li>
+                    {% if user.is_authenticated and perms.patient.add_patient %}
+                        <li><a href="{% url 'patient:add' %}">Ajouter un patient</a></li>
                     {% endif %}
                 </ul>
             </li>
             <li>
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                   aria-haspopup="true" aria-expanded="false">Gestion des stocks<span class="caret"></span></a>
+                   aria-haspopup="true" aria-expanded="false">Stocks<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><a href="{% url 'stock:view_detail' %}">Stock détaillé par centre</a></li>
                     <li><a href="{% url 'stock:view_global' %}">Stock global par centre</a></li>
-                    {% if user.is_authenticated %}
-                    <li><a href="{% url 'stock:add' %}">Ajout de doses à un centre</a></li>
+                    {% if user.is_authenticated and perms.stock.add_stock %}
+                        <li><a href="{% url 'stock:add' %}">Ajout de doses à un centre</a></li>
                     {% endif %}
                 </ul>
             </li>
             {% if user.is_authenticated %}
+                <li>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                       aria-haspopup="true" aria-expanded="false">Médecins<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{% url 'medecin:view_all' %}">Liste des médecins enregistrés</a></li>
+                        {% if perms.groups.add_medecin %}
+                            <li><a href="{% url 'medecin:check_requests' %}">Gérer les demandes d'enregistrement</a>
+                            </li>
+                        {% endif %}
+                        <li><a href="{% url 'medecin:ask_registering' %}">Faire une demande d'enregistrement</a></li>
+                    </ul>
+                </li>
+            {% endif %}
+            {% if user.is_authenticated and perms.rendezvous.view_rdv %}
+                <li>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                       aria-haspopup="true" aria-expanded="false">Rendez-vous<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{% url 'rendezvous:select_patient' %}">Dossier de vaccination d'un patient</a></li>
+                    </ul>
+                </li>
+            {% endif %}
             <li>
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                   aria-haspopup="true" aria-expanded="false">Gestion des rendez-vous<span class="caret"></span></a>
+                   aria-haspopup="true" aria-expanded="false">Innovations<span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="{% url 'rendezvous:select_patient' %}">Dossier de vaccination d'un patient</a></li>
+                    <li><a href="{% url 'innovations:innovation_1' %}">Innovation 1</a></li>
                 </ul>
             </li>
-            {% endif %}
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li>
@@ -65,10 +89,11 @@
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     {% if user.is_authenticated %}
+                        <li style="text-align:center; background-color: #dcddde;">{{ user.username }}</li>
                         <li><a href="{% url 'index:logout' %}">Déconnexion</a></li>
                     {% else %}
                         <li><a href="{% url 'index:login' %}">Connexion</a></li>
-                        <li><a href="{% url 'index:login' %}">Nouveau compte</a></li>
+                        <li><a href="{% url 'index:sign_up' %}">Nouveau compte</a></li>
                     {% endif %}
                 </ul>
             </li>

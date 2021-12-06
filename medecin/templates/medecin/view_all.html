@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title_page %} Liste des médecins enregistrés sur la plateforme {% endblock %}
+
+{% block content %}
+
+{% if doctors %}
+<table class="table table-striped table-bordered">
+    <thead>
+    <tr>
+        <th scope="col">nom</th>
+        <th scope="col">prenom</th>
+        <th scope="col">adresse mail</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for doctor in doctors %}
+    <tr>
+        <td>{{ doctor.last_name }}</td>
+        <td>{{ doctor.first_name }}</td>
+        <td>{{ doctor.email }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="alert alert-danger" role="alert">
+    Il n'y a pas encore de médecin enregistré sur le site.
+</div>
+{% endif %}
+{% endblock %}

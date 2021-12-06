@@ -8,6 +8,9 @@ class Stock(models.Model):
     vaccin_id = models.ForeignKey(Vaccin, on_delete=models.CASCADE, verbose_name='Vaccin')
     doses = models.IntegerField()
 
+    def __str__(self):
+        return f"{self.centre_id.label} ({self.vaccin_id.label})"
+
     @staticmethod
     def get_list_vaccin_label():
         values_name = Stock.objects.all().values_list('vaccin_id__label').distinct()

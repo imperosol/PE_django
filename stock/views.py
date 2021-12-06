@@ -1,6 +1,6 @@
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from .models import Stock
 from .forms import StockForm
 
@@ -21,12 +21,14 @@ def view_global(request):
     return render(request, 'stock/view_stock.html', context)
 
 
+@permission_required('stock.add_stock')
 @login_required
 def add(request):
     context = {'form': StockForm()}
     return render(request, 'stock/add.html', context)
 
 
+@permission_required('stock.add_stock')
 @login_required
 def added(request):
     vaccin = request.POST.get('vaccin_id')

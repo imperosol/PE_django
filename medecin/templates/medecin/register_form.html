@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title_page %} Faire une demande d'enregistrement {% endblock %}
+
+{% block content %}
+
+    {% if not already_registered %}
+        <div class="alert alert-info" role="alert">
+            Vous vous apprêtez à envoyer une demande d'enregistrement en tant que médecin.
+            Cette demande sera examinée par la Haute Autorité de Santé.
+        </div>
+        <form action="{% url 'medecin:register_result'  %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="confirm-demand" value="true">
+            <input type="submit" class="btn btn-primary" value="confirmer la demande" tabindex="1">
+        </form>
+
+    {% else %}
+        <div class="alert alert-info" role="alert">
+            Vous êtes déjà médecin ou avez déjà envoyé une demande.
+        </div>
+    {% endif %}
+
+{% endblock %}

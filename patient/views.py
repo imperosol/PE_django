@@ -1,15 +1,17 @@
-from django.shortcuts import render, get_list_or_404
-from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required, permission_required
 from .models import Patient
 from .forms import PatientForm
 
 
+@permission_required('patient.add_patient')
 @login_required
 def add(request):
     context = {'form': PatientForm()}
     return render(request, 'patient/add.html', context)
 
 
+@permission_required('patient.add_patient')
 @login_required
 def added(request):
     form = PatientForm(request.POST)
@@ -19,7 +21,7 @@ def added(request):
 
 
 def view_all(request):
-    patients = get_list_or_404(Patient)
+    patients = Patient.objects.all()
     context = {
         'patients': patients
     }

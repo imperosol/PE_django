@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_list_or_404, get_object_or_404
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from .forms import VaccinForm
 from .models import Vaccin
 
@@ -10,12 +10,14 @@ def view_all(request):
     return render(request, 'vaccin/view_all.html', context)
 
 
+@permission_required('vaccin.add_vaccin')
 @login_required
 def add(request):
     context = {'form': VaccinForm()}
     return render(request, 'vaccin/add.html', context)
 
 
+@permission_required('vaccin.add_vaccin')
 @login_required
 def added(request):
     form = VaccinForm(request.POST)
@@ -24,6 +26,7 @@ def added(request):
     return render(request, 'vaccin/added.html', context)
 
 
+@permission_required('vaccin.change_vaccin')
 @login_required
 def update(request):
     vaccins = get_list_or_404(Vaccin)
@@ -31,6 +34,7 @@ def update(request):
     return render(request, 'vaccin/update.html', context)
 
 
+@permission_required('vaccin.change_vaccin')
 @login_required
 def updated(request):
     vaccin_id = request.POST.get('id_vaccin')

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+
+{% block title_page %} Vérifier les demandes d'enregistrement {% endblock %}
+
+{% block content %}
+
+    {% if requests %}
+        <form action="{% url 'medecin:approve_requests' %}" method="post" class="form-group">
+            {% csrf_token %}
+
+            {% for req in requests %}
+
+                <div class="form-group row">
+                    <label for="{{ req.user.id }}" class="col-sm-3 col-form-label">{{ req }}</label>
+                    <div class="col-sm-2">
+                        <select class="form-control" id="{{ req.user.id }}" name="id{{ req.user.id }}">
+                            <option value="0">--------</option>
+                            <option value="1">Accepter</option>
+                            <option value="2">Refuser</option>
+                        </select>
+                    </div>
+                </div>
+            {% endfor %}
+
+            <div class="col-sm-3"></div>
+            <div class="col-sm-2">
+                <input type="submit" class="btn btn-primary" value="confirmer">
+            </div>
+        </form>
+
+    {% else %}
+
+        <div class="alert alert-info" role="alert">
+            Pas de demande d'enregistrement en attente pour le moment.
+        </div>
+
+    {% endif %}
+
+{% endblock %}

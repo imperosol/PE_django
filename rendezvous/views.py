@@ -1,11 +1,12 @@
-from django.shortcuts import render, get_list_or_404
-from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required, permission_required
 from .models import RDV
 from patient.models import Patient
 from centre.models import Centre
 
 
 @login_required
+@permission_required('rendezvous.add_rdv')
 def select_patient(request):
     patients = Patient.objects.all()
     context = {'patients': patients}
@@ -13,6 +14,7 @@ def select_patient(request):
 
 
 @login_required
+@permission_required('rendezvous.add_rdv')
 def vaccination_patient(request):
     patient_id = request.GET['patient_id']
     injections = RDV.get_nbr_injections(patient_id)

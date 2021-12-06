@@ -4,6 +4,7 @@
 
 {% block content %}
 <form action="{% url 'patient:added'  %}" method="post">
+
     {% csrf_token %}
     <div class="form-group">
         {{ form }}

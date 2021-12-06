@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 from . import views
 
 
-app_name = 'stock'
+app_name = 'innovations'
 urlpatterns = [
     path('innovation_1/', views.innovation_1, name='innovation_1'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

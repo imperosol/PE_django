@@ -18,11 +18,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ''
+SECRET_KEY = 'django-insecure-%n@b=*f3gqybz9u!y$e2n7zf$m(0&cp-0=xlxoovq2%g8978j_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -36,6 +37,7 @@ INSTALLED_APPS = [
     'innovations.apps.InnovationsConfig',
     'stock.apps.StockConfig',
     'rendezvous.apps.RendezvousConfig',
+    'medecin.apps.MedecinConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -130,3 +132,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = '/'  # /index/index
 LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
