@@ -1,24 +1,42 @@
-{% extends "base.html" %}
-
-{% block title_page %} Liste des vaccins {% endblock %}
+{% extends 'base.html' %}
+{% load static %}
+{% block additional_js %}
+    <script src="{% static 'js/sort_tables.js' %}">
+    </script>
+{% endblock %}
+{% block title_page %} Liste des centres {% endblock %}
 
 {% block content %}
+    <div class="sorting-form">
+        <button onclick="sortTable('all-centers')" class="btn btn-submit sorting-choice-btn">Trier</button>
+        <form name="sorting-form" class="top-right">
+            <div class="form-group">
+                <select id="sort-by-column" class="form-control sorting-choice">
+                    <option value="0">id</option>
+                    <option value="1">label</option>
+                    <option value="2">adresse</option>
+                </select>
+            </div>
+            <label for="sort-by-column" class="sorting-choice">Trier par :</label>
+        </form>
+    </div>
 
-    <table class="table table-striped table-bordered">
+
+    <table class="table table-striped table-bordered" id="all-centers">
         <thead>
         <tr>
-            <th scope="col">id</th>
-            <th scope="col">label</th>
-            <th scope="col">adresse</th>
+            <th scope="col" onclick="sortTable('all-centers', 0)">id</th>
+            <th scope="col" onclick="sortTable('all-centers', 1)">label</th>
+            <th scope="col" onclick="sortTable('all-centers', 2)">adresse</th>
         </tr>
         </thead>
         <tbody>
         {% for centre in centres %}
-        <tr>
-            <td> {{ centre.id }}</td>
-            <td> {{ centre.label }}</td>
-            <td> {{ centre.adresse }}</td>
-        </tr>
+            <tr>
+                <td> {{ centre.id }}</td>
+                <td> {{ centre.label }}</td>
+                <td> {{ centre.adresse }}</td>
+            </tr>
         {% endfor %}
         </tbody>
     </table>

@@ -14,3 +14,20 @@ body {
 .form-group {
     margin-bottom: 40px;
 }
+
+.sorting-form {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row-reverse;
+
+    height: 34px;
+}
+
+/*.sorting-choice {*/
+/*          display: flex;*/
+/*          flex-direction: row-reverse;*/
+/*}*/
+
+.sorting-choice-btn {
+    height: 34px;
+}
